@@ -2,3 +2,4 @@ There are many enjoyable activities on this funny little planet Earth, and still
 
 As a beginner developer, you can contribute to creating this wonderful cinema experience. Your good friends asked you to help them create an application for a cinema theatre where people can get tickets, reserve seats, and enjoy their movie night.
 
+Keep Learning!
