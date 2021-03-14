@@ -18,7 +18,6 @@ public class Cinema {
             n = scanner.nextInt();
         }
 
-        // Write your code here
         cinema = new String[m][n];
         array_fill(cinema);
         //cinema_view(cinema);
