@@ -1,9 +1,11 @@
 package cinema;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Cinema {
     public static void main(String[] args) {
+        String [][] cinema;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the number of rows:");
         int m = scanner.nextInt();
@@ -15,29 +17,40 @@ public class Cinema {
         while(n>9){
             n = scanner.nextInt();
         }
+
         // Write your code here
-        cinema_view(m, n);
+        cinema = new String[m][n];
+        array_fill(cinema);
+        //cinema_view(cinema);
         //Estimating profit from new Room
-        book_ticket(m, n);
+        //book_ticket(cinema);
         //increase_space();
+        //cinema_view(cinema);
+        menu(cinema);
     }
-    static void cinema_view(int m, int n){
+    static void array_fill(String [][] array){
+        for (String[] strings : array) {
+            Arrays.fill(strings, "S");
+        }
+    }
+    static void cinema_view(String [][] array){
 
 
         System.out.print("Cinema:\n  ");
-        for(int i=1; i<=m+1; i++){
+        for(int i=1; i<array[0].length+1; i++){
             System.out.print(i + " ");
         }
         System.out.print("\n");
-        for(int i=1; i<=m; i++){
+        for(int i=1; i<=array.length; i++){
             System.out.print(i + " ");
-            for (int j=0; j<n; j++){
-                System.out.print("S ");
+            for (int j=0; j<array[0].length; j++){
+                System.out.print(array[i-1][j] + " ");
             }
             System.out.print("\n");
         }
 
     }
+    /*
     static void increase_space(){
         Scanner scanner = new Scanner(System.in);
         //Asking new Roes of Room
@@ -58,44 +71,49 @@ public class Cinema {
         System.out.println("Total income:");
         System.out.println("$" + total_income);
     }
-    static void book_ticket(int row, int col){
+
+     */
+    static void book_ticket(String [][] array){
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter a row number:");
         int m = scan.nextInt();
-        while(m>row){
+        while(m>array.length){
             m = scan.nextInt();
         }
         System.out.println("Enter a seat number in that row:");
         int n = scan.nextInt();
-        while(n>col){
+        while(n>array[0].length){
             n = scan.nextInt();
         }
+        array[m-1][n-1] = "B";
         int ticket_price = 0;
-        if(row*col<=60)
+        if(array.length*array[0].length <= 60)
             ticket_price = 10;
         else{
-            if(m<=row/2)
+            if(m<= array.length/2)
                 ticket_price = 10;
             else
                 ticket_price = 8;
         }
         System.out.println("Ticket price: $" + ticket_price);
-        System.out.print("Cinema:\n  ");
-        for(int i=1; i<=row+1; i++){
-            System.out.print(i + " ");
         }
-        System.out.print("\n");
-        for(int i=1; i<=row; i++){
-            System.out.print(i + " ");
-            for (int j=0; j<col; j++){
-                if(i == m && j+1 == n)
-                    System.out.print("B ");
-                else
-                    System.out.print("S ");
-            }
-            System.out.print("\n");
+    static void menu(String [][]array){
+        int opt;
+
+        boolean check = true;
+        while (check){
+            System.out.println("1. Show the seats\n2. Buy a ticket\n0. Exit");
+            Scanner scan = new Scanner(System.in);
+            opt = scan.nextInt();
+            if(opt == 1)
+                cinema_view(array);
+            else if (opt == 2)
+                book_ticket(array);
+            else
+                check = false;
         }
     }
+
 }
 
 
